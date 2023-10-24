@@ -1,9 +1,7 @@
-# React + Vite
+# Christmas project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React frontend Christmas project for Helsinki Business College full stack development education.
 
-Currently, two official plugins are available:
+This will be a memory game (muistipeli) with cards that play christmas songs. The player needs to find pairs of cards that play the same song.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# christmas-project
+The project will be created with React.
