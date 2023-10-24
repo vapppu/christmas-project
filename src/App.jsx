@@ -36,7 +36,7 @@ function App() {
     return array; 
   };
 
-  const songCards = shuffle(songs.concat(songs))
+  const songCards = shuffle(songs.concat([...songs]))
 
 
   return (

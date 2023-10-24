@@ -1,23 +1,15 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const AudioCards = ({songCards}) => {
-    console.log("Rendering")
-
-
-  const audioFiles = songCards.map(
-    (song) => new Audio(`./src/assets/music/${song}`)
-  );
-
+const AudioCards = ({ songCards }) => {
   const cards = songCards.map((song) => {
     return {
-        audio: new Audio(`./src/assets/music/${song}`),
-        id: songCards.indexOf(song),
-        active: false,
-    }
-  })
-
-  console.log(cards)
+      audio: new Audio(`./src/assets/music/${song}`),
+      src: `./src/assets/music/${song}`,
+      id: songCards.indexOf(song),
+      active: false,
+    };
+  });
 
   const [playing, setPlaying] = useState(null);
 
@@ -29,52 +21,71 @@ const AudioCards = ({songCards}) => {
 
   const [open, setOpen] = useState([]);
 
-  const openCard = (card, file) => {
-    if (open.length === 0) {
-        setOpen(open.concat({card: card, file: file}))
-        console.log(`yksi kortti avattu`)
+  const openCard = (card) => {
+    if (open.length < 2) {
+      setOpen([...open].concat(card));
+    } else if (open.length >= 2) {
+      setOpen([card]);
     }
-    else if (open.length === 1) {
-        console.log("Kaksi korttia avattu!")
-        if (open[0].file.src === file.src)
-        {
-            console.log("Found!!!!")
-        }
-        else {
-            console.log("Not found...")
-        }
-        setOpen([])
-    }
-  }
+  };
 
   useEffect(() => {
-    if (open.length !== 0) 
-    {
-        open.map((opened) => {console.log(opened)})
+    if (open.length > 0) {
+      open.map((card) => {
+        card.active = true;
+      });
     }
-  }, [open])
+    console.log(open);
 
-  const playSong = (file) => {
+    if (open.length === 2) {
+      if (open[0].id === open[1].id) {
+        return;
+      }
+      if (open[0].src === open[1].src) {
+        console.log("Löytyi!");
+      }
+    }
+  }, [open]);
+
+
+  useEffect(() => {
+    if (open.length !== 0) {
+      open.map((opened) => {
+        console.log(opened);
+      });
+    }
+  }, [open]);
+
+  const playSong = (audio) => {
     if (playing) {
       playing.pause();
 
-      if (file.src === playing.src) {
-        setPlaying(null)
-        return
-        }
+      if (audio.src === playing.src) {
+        setPlaying(null);
+        return;
+      }
     }
-      setPlaying(file);
-    
+    setPlaying(audio);
+  };
+
+  const clickOpen = (card) => {
+    console.log(card);
+    playSong(card.audio);
+
+    openCard(card);
   };
 
   return (
     <section className="cards">
-
-      {cards.map((card) => <Card active={card.active} handleClick={() => {
-        playSong(card.audio)
-        openCard(card.file)
-      }}/>)}
-
+      {cards.map((card, index) => (
+        <Card
+          key={index}
+          active={card.active}
+          handleClick={() => {
+            clickOpen(card);
+          }}
+        />
+      ))}
     </section>
   );
 };
