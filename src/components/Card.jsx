@@ -1,9 +1,11 @@
 import {useState} from 'react'
 import '../App.css'
 
-const Card = ({playSong}) => {
+const Card = ({active, handleClick}) => {
 
-    return <div className="card" onClick = {playSong}><p>Card</p></div>
+    console.log(active)
+
+    return <div className="card" onClick = {handleClick}><p>Card</p></div>
 }
 
 export default Card;
