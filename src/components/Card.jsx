@@ -3,7 +3,19 @@ import '../App.css'
 
 const Card = ({active, handleClick}) => {
 
-    return <div className="card" onClick = {handleClick}><p>Card</p></div>
+    if (active)
+    {
+        console.log("Active!")
+    }
+
+    let activityClass;
+
+    if (active)
+        activityClass = "active"
+    else
+        activityClass = "nonActive"
+
+    return <div className={`card ${activityClass}`} onClick = {handleClick}><p>Card</p></div>
 }
 
 export default Card;

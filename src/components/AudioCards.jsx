@@ -2,39 +2,40 @@ import { useState, useEffect } from "react";
 import Card from "./Card";
 
 const AudioCards = ({ songCards }) => {
-  const cards = songCards.map((song) => {
+  const cardData = songCards.map((song, index) => {
     return {
       audio: new Audio(`./src/assets/music/${song}`),
       src: `./src/assets/music/${song}`,
-      id: songCards.indexOf(song),
       active: false,
+      index: index,
     };
   });
 
-  const [playing, setPlaying] = useState(null);
+  const [cards, setCards] = useState(cardData);
+
+  const [playingSong, setPlayingSong] = useState(null);
 
   useEffect(() => {
-    if (playing) {
-      playing.play();
+    if (playingSong) {
+      playingSong.play();
     }
-  }, [playing]);
+  }, [playingSong]);
 
   const [open, setOpen] = useState([]);
 
   const openCard = (card) => {
     if (open.length < 2) {
+      card.active = true;
       setOpen([...open].concat(card));
     } else if (open.length >= 2) {
+      open.forEach((card) => (card.active = false));
       setOpen([card]);
+      card.active = true;
     }
   };
 
   useEffect(() => {
-    if (open.length > 0) {
-      open.map((card) => {
-        card.active = true;
-      });
-    }
+
     console.log(open);
 
     if (open.length === 2) {
@@ -47,39 +48,29 @@ const AudioCards = ({ songCards }) => {
     }
   }, [open]);
 
-
-  useEffect(() => {
-    if (open.length !== 0) {
-      open.map((opened) => {
-        console.log(opened);
-      });
-    }
-  }, [open]);
-
   const playSong = (audio) => {
-    if (playing) {
-      playing.pause();
+    if (playingSong) {
+      playingSong.pause();
 
-      if (audio.src === playing.src) {
-        setPlaying(null);
+      if (audio.src === playingSong.src) {
+        setPlayingSong(null);
         return;
       }
     }
-    setPlaying(audio);
+    setPlayingSong(audio);
   };
 
   const clickOpen = (card) => {
     console.log(card);
     playSong(card.audio);
-
     openCard(card);
   };
 
   return (
     <section className="cards">
-      {cards.map((card, index) => (
+      {cards.map((card) => (
         <Card
-          key={index}
+          key={card.index}
           active={card.active}
           handleClick={() => {
             clickOpen(card);
