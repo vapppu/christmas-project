@@ -17,7 +17,7 @@ const AudioCards = ({ songCards }) => {
 
   useEffect(() => {
     if (playingSong) {
-      playingSong.play();
+      playingSong.audio.play();
     }
   }, [playingSong]);
 
@@ -39,30 +39,30 @@ const AudioCards = ({ songCards }) => {
     console.log(open);
 
     if (open.length === 2) {
-      if (open[0].id === open[1].id) {
+      if (open[0].index === open[1].index) {
         return;
       }
       if (open[0].src === open[1].src) {
-        console.log("Löytyi!");
+        console.log("Löytyi!!");
       }
     }
   }, [open]);
 
-  const playSong = (audio) => {
+  const playSong = (card) => {
     if (playingSong) {
-      playingSong.pause();
+      playingSong.audio.pause();
 
-      if (audio.src === playingSong.src) {
+      if (card.index === playingSong.index) {
         setPlayingSong(null);
         return;
       }
     }
-    setPlayingSong(audio);
+    setPlayingSong(card);
   };
 
   const clickOpen = (card) => {
     console.log(card);
-    playSong(card.audio);
+    playSong(card);
     openCard(card);
   };
 
@@ -71,6 +71,7 @@ const AudioCards = ({ songCards }) => {
       {cards.map((card) => (
         <Card
           key={card.index}
+          text={card.src}
           active={card.active}
           handleClick={() => {
             clickOpen(card);

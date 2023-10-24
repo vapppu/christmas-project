@@ -1,7 +1,10 @@
 import {useState} from 'react'
 import '../App.css'
 
-const Card = ({active, handleClick}) => {
+const Card = ({text, active, handleClick}) => {
+
+    const splittedText = text.split("/")
+    const filename = splittedText[splittedText.length - 1]
 
     if (active)
     {
@@ -15,7 +18,7 @@ const Card = ({active, handleClick}) => {
     else
         activityClass = "nonActive"
 
-    return <div className={`card ${activityClass}`} onClick = {handleClick}><p>Card</p></div>
+    return <div className={`card ${activityClass}`} onClick = {handleClick}><p>{filename}</p></div>
 }
 
 export default Card;
