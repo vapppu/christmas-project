@@ -37,6 +37,26 @@ const AudioCards = () => {
     }
   }, [playing]);
 
+  const [open, setOpen] = useState([]);
+
+  const openCard = (file) => {
+    if (open.length === 0) {
+        setOpen(open.concat(file))
+        console.log(`yksi kortti avattu`)
+    }
+    else if (open.length === 1) {
+        console.log("Kaksi korttia avattu!")
+        if (open[0].src === file.src)
+        {
+            console.log("Found!!!!")
+        }
+        else {
+            console.log("Not found...")
+        }
+        setOpen([])
+    }
+  }
+
   const playSong = (file) => {
     if (playing) {
       playing.pause();
@@ -53,8 +73,11 @@ const AudioCards = () => {
 
   return (
     <section className="cards">
-      {audioFiles.map((file) => (
-        <Card playSong={() => playSong(file)} />
+      {audioFiles.concat(audioFiles).map((file) => (
+        <Card playSong={() => {
+            playSong(file)
+            openCard(file)
+            }} />
       ))}
     </section>
   );
