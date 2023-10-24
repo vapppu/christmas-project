@@ -7,6 +7,7 @@ const AudioCards = ({ songCards }) => {
       audio: new Audio(`./src/assets/music/${song}`),
       src: `./src/assets/music/${song}`,
       active: false,
+      found: false,
       index: index,
     };
   });
@@ -35,7 +36,6 @@ const AudioCards = ({ songCards }) => {
   };
 
   useEffect(() => {
-
     console.log(open);
 
     if (open.length === 2) {
@@ -43,6 +43,7 @@ const AudioCards = ({ songCards }) => {
         return;
       }
       if (open[0].src === open[1].src) {
+        open.forEach((card) => (card.found = true));
         console.log("Löytyi!!");
       }
     }
@@ -73,6 +74,7 @@ const AudioCards = ({ songCards }) => {
           key={card.index}
           text={card.src}
           active={card.active}
+          found={card.found}
           handleClick={() => {
             clickOpen(card);
           }}

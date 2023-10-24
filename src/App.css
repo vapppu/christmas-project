@@ -75,3 +75,10 @@ h1 {
   background-color: red;
   box-shadow: initial;
 }
+.found {
+  background-color: darkgreen;
+  border: gold 4px inset;
+}
+.found:hover {
+  background-color: darkgreen;
+}

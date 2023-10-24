@@ -1,24 +1,28 @@
-import {useState} from 'react'
-import '../App.css'
+import { useState } from "react";
+import "../App.css";
 
-const Card = ({text, active, handleClick}) => {
+const Card = ({ text, active, found, handleClick }) => {
+  // For development purposes only:
+  const splittedText = text.split("/");
+  const filename = splittedText[splittedText.length - 1];
 
-    const splittedText = text.split("/")
-    const filename = splittedText[splittedText.length - 1]
+  let activityClass;
 
-    if (active)
-    {
-        console.log("Active!")
-    }
+  if (active) activityClass = "active";
+  else activityClass = "nonActive";
 
-    let activityClass;
-
-    if (active)
-        activityClass = "active"
-    else
-        activityClass = "nonActive"
-
-    return <div className={`card ${activityClass}`} onClick = {handleClick}><p>{filename}</p></div>
-}
+  if (!found) {
+    return (
+      <div className={`card ${activityClass}`} onClick={handleClick}>
+        <p>{filename}</p>
+      </div>
+    );
+  }
+  return (
+    <div className="card found">
+      <p>{filename}</p>
+    </div>
+  );
+};
 
 export default Card;
