@@ -53,13 +53,10 @@ img {
   align-items: center;
   justify-content: center;
 }
-h1 {
-  text-align: center;
-}
-.timer {
-  text-align: center;
-}
-.score {
+h1,
+.timer,
+.score,
+.clicks {
   text-align: center;
 }
 
