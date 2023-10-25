@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const MusicCards = ({ songCards, increaseScore, finishGame }) => {
+const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) => {
   
   const cardData = songCards.map((song, index) => {
     return {
@@ -40,8 +40,11 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
 
   useEffect(() => {
     if (allCardsAreFound()) {
-      nowPlaying.audio.pause()
       finishGame()
+
+      setTimeout(() => {
+      }, 500)
+      
     }
   }, [cards])
 
@@ -70,6 +73,8 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
     if (open.includes(card)) {
       return;
     }
+    increaseClicks();
+
     if (open.length < 2) {
       card.active = true;
       setOpen([...open].concat(card));

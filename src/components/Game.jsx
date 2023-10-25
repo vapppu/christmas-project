@@ -3,6 +3,7 @@ import "../App.css";
 import MusicCards from "./MusicCards";
 import Score from "./Score";
 import Timer from "./Timer";
+import Clicks from "./Clicks";
 import FinishScreen from "./FinishScreen"
 
 const Game = ({songs, level}) => {
@@ -12,8 +13,10 @@ const Game = ({songs, level}) => {
   const [score, setScore] = useState(0);
   const [gameIsFinished, setGameIsFinished] = useState(false)
   const [seconds, setSeconds] = useState(0);
+  const [clicks, setClicks] = useState(0)
   const [finishTime, setFinishTime] = useState(null)
   const [songsToPlay, setSongsToPlay] = useState(songs)
+
 
 
   const songsInPlay = () => {
@@ -36,6 +39,8 @@ const Game = ({songs, level}) => {
   }, [seconds])
 
   const increaseScore = () => setScore(score + 1);
+
+  const increaseClicks = () => setClicks(clicks + 1);
 
   const shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -62,7 +67,7 @@ const Game = ({songs, level}) => {
   }
 
   if (gameIsFinished) {
-    return <FinishScreen time={hoursMinutesSeconds(finishTime)}/>
+    return <FinishScreen time={hoursMinutesSeconds(finishTime)} clicks={clicks}/>
   }
 
   return (
@@ -70,7 +75,8 @@ const Game = ({songs, level}) => {
       <h1>XMAS MUSIC GAME</h1>
         <Timer time={hoursMinutesSeconds(seconds)}/>
       <Score score={score} />
-      <MusicCards songCards={songsToPlay} increaseScore={increaseScore} finishGame={finishGame}/>
+      <Clicks clicks = {clicks} /> 
+      <MusicCards songCards={songsToPlay} increaseScore={increaseScore} finishGame={finishGame} increaseClicks = {increaseClicks}/>
     </>
   );
 }

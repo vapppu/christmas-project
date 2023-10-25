@@ -1,11 +1,19 @@
 import '../App.css'
 
-const FinishScreen = ({time}) => {
+const FinishScreen = ({time, clicks}) => {
 
-    const finishTime = time;
+    const newGame = () => {
+        console.log("Reloading new game...")
+        window.location.reload()
+    }
+    // const finishTime = time;
     return <div className="finishScreen">
     <p>Finished!!!</p>
-    <p>Your time: {finishTime}</p></div>
+    <p>Your time: {time}</p>
+    <p>Clicks used: {clicks}</p>
+    <p>HAPPY HOLIDAYS!!</p>
+    <button onClick={newGame}>Play again</button>
+    </div>
 }
 
 export default FinishScreen;
