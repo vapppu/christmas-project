@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const AudioCards = ({ songCards, increaseScore }) => {
+const MusicCards = ({ songCards, increaseScore }) => {
   const cardData = songCards.map((song, index) => {
     return {
       audio: new Audio(`./src/assets/music/${song}`),
@@ -102,4 +102,4 @@ const AudioCards = ({ songCards, increaseScore }) => {
   );
 };
 
-export default AudioCards;
+export default MusicCards;

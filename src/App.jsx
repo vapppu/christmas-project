@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import AudioCards from "./components/AudioCards";
+import AudioCards from "./components/MusicCards";
 import Score from "./components/Score";
 
 function App() {
