@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import './App.css'
-import AudioCards from './components/AudioCards'
-
+import { useState } from "react";
+import "./App.css";
+import AudioCards from "./components/AudioCards";
+import Score from "./components/Score";
 
 function App() {
-
-
   const songs = [
     "angels-we-have.mp3",
     "carol-of-the-bells.mp3",
@@ -28,25 +26,27 @@ function App() {
     "we-wish-you.mp3",
   ];
 
-  const shuffle = (array) => { 
-    for (let i = array.length - 1; i > 0; i--) { 
-      const j = Math.floor(Math.random() * (i + 1)); 
-      [array[i], array[j]] = [array[j], array[i]]; 
-    } 
-    return array; 
+  const [score, setScore] = useState(0);
+  const increaseScore = () => setScore(score + 1);
+
+  const shuffle = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   };
 
-  const songCards = shuffle(songs.concat([...songs]))
-
+  const songCards = shuffle(songs.concat([...songs]));
 
   return (
     <>
       <h1>XMAS MUSIC GAME</h1>
 
-      <AudioCards songCards={songCards} />
-
-       </>
-  )
+      <Score score={score} />
+      <AudioCards songCards={songCards} increaseScore={increaseScore} />
+    </>
+  );
 }
 
-export default App
+export default App;

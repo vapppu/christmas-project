@@ -45,6 +45,9 @@ body {
 h1 {
   text-align: center;
 }
+.score {
+  text-align: center;
+}
 
 .cards {
   display: flex;

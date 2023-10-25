@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const AudioCards = ({ songCards }) => {
+const AudioCards = ({ songCards, increaseScore }) => {
   const cardData = songCards.map((song, index) => {
     return {
       audio: new Audio(`./src/assets/music/${song}`),
@@ -39,19 +39,14 @@ const AudioCards = ({ songCards }) => {
     return (card1.src === card2.src)
   }
 
+  
   const markAsFound = (foundCards) => {
     const newCards = [...cards]
-    console.log("New cards:")
-    console.log(newCards)
-
     foundCards.forEach((foundCard) => 
     {
         const index = newCards.findIndex((newCard) => newCard.index === foundCard.index)
         newCards[index].found = true;
     })
-
-    console.log("Päivitetyt kortit:")
-    console.log(newCards)
     setCards(newCards)
   }
 
@@ -67,6 +62,7 @@ const AudioCards = ({ songCards }) => {
       {
         console.log("Matchi löytyny!")
         markAsFound([open[0], open[1]])
+        increaseScore()
     
       }
     }
