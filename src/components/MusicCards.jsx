@@ -5,7 +5,7 @@ const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) =>
   
   const cardData = songCards.map((song, index) => {
     return {
-      src: `./${song}`,
+      src: song,
       active: false,
       found: false,
       index: index,
