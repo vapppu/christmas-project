@@ -14,13 +14,13 @@ const AudioCards = ({ songCards }) => {
 
   const [cards, setCards] = useState(cardData);
 
-  const [playingSong, setPlayingSong] = useState(null);
+  const [nowPlaying, setNowPlaying] = useState(null);
 
   useEffect(() => {
-    if (playingSong) {
-      playingSong.audio.play();
+    if (nowPlaying) {
+      nowPlaying.audio.play();
     }
-  }, [playingSong]);
+  }, [nowPlaying]);
 
   const [open, setOpen] = useState([]);
 
@@ -35,6 +35,27 @@ const AudioCards = ({ songCards }) => {
     }
   };
 
+  const isMatch = (card1, card2) => {
+    return (card1.src === card2.src)
+  }
+
+  const markAsFound = (foundCards) => {
+    const newCards = [...cards]
+    console.log("New cards:")
+    console.log(newCards)
+
+    foundCards.forEach((foundCard) => 
+    {
+        const index = newCards.findIndex((newCard) => newCard.index === foundCard.index)
+        newCards[index].found = true;
+    })
+
+    console.log("Päivitetyt kortit:")
+    console.log(newCards)
+    setCards(newCards)
+  }
+
+  // When new card is opened
   useEffect(() => {
     console.log(open);
 
@@ -42,27 +63,28 @@ const AudioCards = ({ songCards }) => {
       if (open[0].index === open[1].index) {
         return;
       }
-      if (open[0].src === open[1].src) {
-        open.forEach((card) => (card.found = true));
-        console.log("Löytyi!!");
+      if (isMatch(open[0], open[1]))
+      {
+        console.log("Matchi löytyny!")
+        markAsFound([open[0], open[1]])
+    
       }
     }
   }, [open]);
 
   const playSong = (card) => {
-    if (playingSong) {
-      playingSong.audio.pause();
+    if (nowPlaying) {
+      nowPlaying.audio.pause();
 
-      if (card.index === playingSong.index) {
-        setPlayingSong(null);
+      if (card.index === nowPlaying.index) {
+        setNowPlaying(null);
         return;
       }
     }
-    setPlayingSong(card);
+    setNowPlaying(card);
   };
 
   const clickOpen = (card) => {
-    console.log(card);
     playSong(card);
     openCard(card);
   };
