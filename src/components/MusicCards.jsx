@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const MusicCards = ({ songCards, increaseScore }) => {
+const MusicCards = ({ songCards, increaseScore, finishGame }) => {
   const cardData = songCards.map((song, index) => {
     return {
       audio: new Audio(`./src/assets/music/${song}`),
@@ -15,6 +15,8 @@ const MusicCards = ({ songCards, increaseScore }) => {
   const [cards, setCards] = useState(cardData);
   const [nowPlaying, setNowPlaying] = useState(null);
   const [open, setOpen] = useState([]);
+  const [gameFInished, setGameFinished] = useState(false)
+
 
   // When song is set to play, play it
   useEffect(() => {
@@ -32,17 +34,27 @@ const MusicCards = ({ songCards, increaseScore }) => {
         return;
       }
       if (isMatch(open[0], open[1])) {
-        console.log("Matchi löytyny!");
         markAsFound([open[0], open[1]]);
         increaseScore();
       }
     }
   }, [open]);
 
+  useEffect(() => {
+    console.log("Checking if game is still going on...")
+    if (allCardsAreFound()) {
+      finishGame()
+    }
+  }, [cards])
+
   const clickOpen = (card) => {
     playSong(card);
     openCard(card);
   };
+
+  const allCardsAreFound = () => {
+    return !cards.some((card) => card.found === false)
+  }
 
   const playSong = (card) => {
     if (nowPlaying) {
