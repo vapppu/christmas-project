@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import Card from "./Card";
 
 const MusicCards = ({ songCards, increaseScore, finishGame }) => {
-
-  console.log(songCards)
   
   const cardData = songCards.map((song, index) => {
     return {

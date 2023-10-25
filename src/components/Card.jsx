@@ -14,13 +14,13 @@ const Card = ({ text, active, found, handleClick }) => {
   if (!found) {
     return (
       <div className={`card ${activityClass}`} onClick={handleClick}>
-        <p>{filename}</p>
+        <p>Play me!</p>
       </div>
     );
   }
   return (
     <div className="card found">
-      <p>{filename}</p>
+    <p>Good job!!</p>
     </div>
   );
 };

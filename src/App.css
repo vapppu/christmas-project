@@ -38,8 +38,6 @@ img {
 
 /* Element rules */
 
-body {
-}
 .select {
   height: 100vh;
   display: flex;
@@ -100,4 +98,12 @@ h1 {
 }
 .found:hover {
   background-color: darkgreen;
+}
+.finishScreen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
