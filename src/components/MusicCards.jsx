@@ -5,7 +5,7 @@ const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) =>
   
   const cardData = songCards.map((song, index) => {
     return {
-      src: `/public/music/${song}`,
+      src: `/dist/music/${song}`,
       active: false,
       found: false,
       index: index,
