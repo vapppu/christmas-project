@@ -5,7 +5,6 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
   
   const cardData = songCards.map((song, index) => {
     return {
-      audio: new Audio(`./src/assets/music/${song}`),
       src: `./src/assets/music/${song}`,
       active: false,
       found: false,
@@ -64,7 +63,7 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
         return;
       }
     }
-    setNowPlaying(card);
+    setNowPlaying({...card, audio: new Audio(card.src)});
   };
 
   const openCard = (card) => {
