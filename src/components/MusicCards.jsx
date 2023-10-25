@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Card from "./Card";
 
 const MusicCards = ({ songCards, increaseScore, finishGame }) => {
+
+  console.log(songCards)
+  
   const cardData = songCards.map((song, index) => {
     return {
       audio: new Audio(`./src/assets/music/${song}`),
@@ -40,6 +43,7 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
 
   useEffect(() => {
     if (allCardsAreFound()) {
+      nowPlaying.audio.pause()
       finishGame()
     }
   }, [cards])
