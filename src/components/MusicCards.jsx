@@ -5,7 +5,7 @@ const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) =>
   
   const cardData = songCards.map((song, index) => {
     return {
-      src: `/${song}`,
+      src: `./${song}`,
       active: false,
       found: false,
       index: index,
@@ -25,7 +25,6 @@ const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) =>
 
   // When new card is opened
   useEffect(() => {
-    console.log(open);
 
     if (open.length === 2) {
       if (open[0].index === open[1].index) {

@@ -3,7 +3,6 @@ import '../App.css'
 const FinishScreen = ({time, clicks}) => {
 
     const newGame = () => {
-        console.log("Reloading new game...")
         window.location.reload()
     }
     // const finishTime = time;

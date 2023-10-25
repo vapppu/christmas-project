@@ -20,10 +20,7 @@ const Game = ({songs, level}) => {
 
 
   const songsInPlay = () => {
-    console.log("Creating songs to play with")
-    console.log(`Level is ${level}`)
     const shuffeledSongs = shuffle(songs)
-    console.log(shuffeledSongs)
     const selectedSongs = shuffeledSongs.slice(0, level)
     return selectedSongs
   }
