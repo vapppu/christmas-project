@@ -45,6 +45,9 @@ body {
 h1 {
   text-align: center;
 }
+.timer {
+  text-align: center;
+}
 .score {
   text-align: center;
 }

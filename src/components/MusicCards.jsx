@@ -15,8 +15,6 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
   const [cards, setCards] = useState(cardData);
   const [nowPlaying, setNowPlaying] = useState(null);
   const [open, setOpen] = useState([]);
-  const [gameFInished, setGameFinished] = useState(false)
-
 
   // When song is set to play, play it
   useEffect(() => {
@@ -41,7 +39,6 @@ const MusicCards = ({ songCards, increaseScore, finishGame }) => {
   }, [open]);
 
   useEffect(() => {
-    console.log("Checking if game is still going on...")
     if (allCardsAreFound()) {
       finishGame()
     }

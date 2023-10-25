@@ -30,7 +30,11 @@ function Game() {
   const [score, setScore] = useState(0);
   const [gameIsFinished, setGameIsFinished] = useState(false)
   const [seconds, setSeconds] = useState(0);
-  const [timeIsRunning, setTimeIsRunning] = useState(0)
+  
+  useEffect(() => {
+    const timer = setInterval(() => setSeconds(seconds + 1), 1000);
+    return () => clearInterval(timer)
+  }, [seconds])
 
   const increaseScore = () => setScore(score + 1);
 

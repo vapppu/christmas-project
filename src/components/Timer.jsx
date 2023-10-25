@@ -1,7 +1,7 @@
 import '../App.css'
 
 const Timer = ({seconds}) => {
-    return <div>Timer: {seconds}</div>
+    return <div className="timer">Timer: {seconds}</div>
 }
 
 export default Timer;
