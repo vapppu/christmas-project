@@ -36,15 +36,31 @@ img {
   height: auto;
 }
 
-/* Element rules */
+/* Element styling */
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: cornsilk;
+}
 
 .select {
   height: 100vh;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 400px;
+  margin: auto;
+}
+.select h1 {
+  font-weight: bold;
+  color: red;
+  letter-spacing: 0.1rem;
+  margin-block-end: 2rem;
+}
+.select p {
+  text-align: center;
 }
 .select ul {
   display: flex;
@@ -52,6 +68,17 @@ img {
   gap: 1rem;
   align-items: center;
   justify-content: center;
+}
+.select button {
+  border: none;
+  border-radius: 3rem;
+  padding: 0.5rem 1rem;
+  font-size: inherit;
+  background-color: green;
+  color: white;
+}
+.select button:hover {
+  background-color: darkgreen;
 }
 h1,
 .timer,
@@ -75,8 +102,12 @@ h1,
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 }
-
+.card svg {
+  max-width: 100%;
+  max-height: 100%;
+}
 .card:hover {
   background-color: lightcoral;
 }

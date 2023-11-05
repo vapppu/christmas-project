@@ -5,7 +5,6 @@ const FinishScreen = ({time, clicks}) => {
     const newGame = () => {
         window.location.reload()
     }
-    // const finishTime = time;
     return <div className="finishScreen">
     <p>Finished!!!</p>
     <p>Your time: {time}</p>

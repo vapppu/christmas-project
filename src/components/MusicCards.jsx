@@ -1,101 +1,90 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
-const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) => {
-  
+const MusicCards = ({
+  songCards,
+  increaseScore,
+  finishGame,
+  increaseClicks,
+}) => {
   const cardData = songCards.map((song, index) => {
     return {
       src: song,
       active: false,
       found: false,
       index: index,
+      playing: false,
     };
   });
 
   const [cards, setCards] = useState(cardData);
   const [nowPlaying, setNowPlaying] = useState(null);
-  const [open, setOpen] = useState([]);
-
-  // When song is set to play, play it
-  useEffect(() => {
-    if (nowPlaying) {
-      nowPlaying.audio.play();
-    }
-  }, [nowPlaying]);
-
-  // When new card is opened
-  useEffect(() => {
-
-    if (open.length === 2) {
-      if (open[0].index === open[1].index) {
-        return;
-      }
-      if (isMatch(open[0], open[1])) {
-        markAsFound([open[0], open[1]]);
-        increaseScore();
-      }
-    }
-  }, [open]);
 
   useEffect(() => {
     if (allCardsAreFound()) {
-      finishGame()
+      setTimeout(() => {}, 500);
+      finishGame();
 
-      setTimeout(() => {
-      }, 500)
-      
-    }
-  }, [cards])
-
-  const clickOpen = (card) => {
-    playSong(card);
-    openCard(card);
-  };
-
-  const allCardsAreFound = () => {
-    return !cards.some((card) => card.found === false)
-  }
-
-  const playSong = (card) => {
-    if (nowPlaying) {
-      nowPlaying.audio.pause();
-
-      if (card.index === nowPlaying.index) {
-        setNowPlaying(null);
-        return;
-      }
-    }
-    setNowPlaying({...card, audio: new Audio(card.src)});
-  };
-
-  const openCard = (card) => {
-    if (open.includes(card)) {
       return;
     }
-    increaseClicks();
 
-    if (open.length < 2) {
-      card.active = true;
-      setOpen([...open].concat(card));
-    } else if (open.length >= 2) {
-      open.forEach((card) => (card.active = false));
-      setOpen([card]);
-      card.active = true;
+    const playing = cards.find((card) => card.playing);
+    if (playing) {
+      setNowPlaying(new Audio(playing.src));
     }
+  }, [cards]);
+
+  useEffect(() => {
+    if (nowPlaying) {
+      nowPlaying.play();
+    }
+  }, [nowPlaying]);
+
+  const allCardsAreFound = () => {
+    return !cards.some((card) => card.found === false);
   };
 
-  const isMatch = (card1, card2) => {
-    return card1.src === card2.src;
-  };
+  const clickopened = (openedCard) => {
+    if (nowPlaying) {
+      nowPlaying.pause();
+    }
 
-  const markAsFound = (foundCards) => {
     const newCards = [...cards];
-    foundCards.forEach((foundCard) => {
-      const index = newCards.findIndex(
-        (newCard) => newCard.index === foundCard.index
-      );
-      newCards[index].found = true;
-    });
+    console.log(newCards);
+    const index = newCards.findIndex((card) => card.index === openedCard.index);
+
+    if (!openedCard.active) {
+      
+      // Open card, maximum two cards at a time
+      if (newCards.filter((card) => card.active).length >= 2) {
+        newCards.forEach((card) => (card.active = false));
+        newCards[index].active = true;
+      } else {
+        newCards[index].active = true;
+      }
+      increaseClicks();
+
+      // Check for match
+      const openedCards = newCards.filter((card) => card.active);
+      if (openedCards.length === 2) {
+        if (openedCards[0].src === openedCards[1].src) {
+          newCards.forEach((card) => {
+            if (card.src === openedCard.src) {
+              card.found = true;
+            }
+          });
+          increaseScore();
+        }
+      }
+    }
+
+    // Toggle playing card sound, mute other cards
+    newCards.forEach((card) =>
+      card.index === openedCard.index
+        ? (card.playing = !card.playing)
+        : (card.playing = false)
+    );
+
     setCards(newCards);
   };
 
@@ -103,12 +92,9 @@ const MusicCards = ({ songCards, increaseScore, finishGame, increaseClicks }) =>
     <section className="cards">
       {cards.map((card) => (
         <Card
-          key={card.index}
-          text={card.src}
-          active={card.active}
-          found={card.found}
+          card={card}
           handleClick={() => {
-            clickOpen(card);
+            clickopened(card);
           }}
         />
       ))}

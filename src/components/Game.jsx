@@ -8,22 +8,12 @@ import FinishScreen from "./FinishScreen"
 
 const Game = ({songs, level}) => {
 
-
-
   const [score, setScore] = useState(0);
   const [gameIsFinished, setGameIsFinished] = useState(false)
   const [seconds, setSeconds] = useState(0);
   const [clicks, setClicks] = useState(0)
   const [finishTime, setFinishTime] = useState(null)
   const [songsToPlay, setSongsToPlay] = useState(songs)
-
-
-
-  const songsInPlay = () => {
-    const shuffeledSongs = shuffle(songs)
-    const selectedSongs = shuffeledSongs.slice(0, level)
-    return selectedSongs
-  }
 
   useEffect(() => {
     const newSongs = songsInPlay()
@@ -34,6 +24,12 @@ const Game = ({songs, level}) => {
     const timer = setInterval(() => setSeconds(seconds + 1), 1000);
     return () => clearInterval(timer)
   }, [seconds])
+
+  const songsInPlay = () => {
+    const shuffeledSongs = shuffle(songs)
+    const selectedSongs = shuffeledSongs.slice(0, level)
+    return selectedSongs
+  }
 
   const increaseScore = () => setScore(score + 1);
 
