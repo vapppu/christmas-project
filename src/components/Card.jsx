@@ -1,10 +1,6 @@
 import "../App.css";
 
 const Card = ({card, handleClick}) => {
-// const Card = ({ active, found, handleClick, playing }) => {
-  const classNames = ["card"]
-  classNames.push(card.active ? "active" : "nonActive")
-  classNames.push((!card.found && card.active) && "false")
   const activityClass = card.active ? "active" : "nonActive";
   const icon = card.playing ? (
     <svg

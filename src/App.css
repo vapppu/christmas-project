@@ -69,7 +69,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-.select button {
+button {
   border: none;
   border-radius: 3rem;
   padding: 0.5rem 1rem;
@@ -77,13 +77,12 @@ body {
   background-color: green;
   color: white;
 }
-.select button:hover {
+button:hover {
   background-color: darkgreen;
 }
 h1,
-.timer,
-.score,
-.clicks {
+.game,
+.result {
   text-align: center;
 }
 

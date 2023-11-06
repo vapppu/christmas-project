@@ -21,16 +21,16 @@ const MusicCards = ({
   const [nowPlaying, setNowPlaying] = useState(null);
 
   useEffect(() => {
-    if (allCardsAreFound()) {
-      setTimeout(() => {}, 500);
-      finishGame();
-
-      return;
-    }
 
     const playing = cards.find((card) => card.playing);
     if (playing) {
       setNowPlaying(new Audio(playing.src));
+    }
+
+    if (allCardsAreFound()) {
+      finishGame();
+
+      return;
     }
   }, [cards]);
 
@@ -50,11 +50,10 @@ const MusicCards = ({
     }
 
     const newCards = [...cards];
-    console.log(newCards);
     const index = newCards.findIndex((card) => card.index === openedCard.index);
 
     if (!openedCard.active) {
-      
+
       // Open card, maximum two cards at a time
       if (newCards.filter((card) => card.active).length >= 2) {
         newCards.forEach((card) => (card.active = false));
@@ -92,6 +91,7 @@ const MusicCards = ({
     <section className="cards">
       {cards.map((card) => (
         <Card
+          key={card.index}
           card={card}
           handleClick={() => {
             clickopened(card);

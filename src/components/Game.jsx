@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import "../App.css";
 import MusicCards from "./MusicCards";
-import Score from "./Score";
-import Timer from "./Timer";
-import Clicks from "./Clicks";
+import Result from "./Result";
 import FinishScreen from "./FinishScreen"
 
 const Game = ({songs, level}) => {
@@ -46,6 +44,7 @@ const Game = ({songs, level}) => {
   const finishGame = () => {
     setGameIsFinished(true)
     setFinishTime(seconds)
+
 }
 
   const hoursMinutesSeconds = (seconds) => {
@@ -64,13 +63,14 @@ const Game = ({songs, level}) => {
   }
 
   return (
-    <>
+    <div className="game">
       <h1>XMAS MUSIC GAME</h1>
-        <Timer time={hoursMinutesSeconds(seconds)}/>
-      <Score score={score} />
-      <Clicks clicks = {clicks} /> 
+      <p>Find pairs!</p>
+        <Result text="score" value={score} />
+        <Result text="time" value={hoursMinutesSeconds(seconds)} />
+        <Result text="clicks" value={clicks} />
       <MusicCards songCards={songsToPlay} increaseScore={increaseScore} finishGame={finishGame} increaseClicks = {increaseClicks}/>
-    </>
+    </div>
   );
 }
 
