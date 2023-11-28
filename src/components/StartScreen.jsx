@@ -29,13 +29,17 @@ const StartScreen = ({songs}) => {
 
     return (<section className="select">
     <h1>Christmas game: find pairs</h1>
-    <p>Open two cards at a time. Try to find cards that play the same christmas song!</p>
-        <p>Select level:</p>
+        <h2>Select level:</h2>
         <ul>
             <li><button onClick={() => selectLevel(4)}>Easy</button></li>
             <li><button onClick={() => selectLevel(8)}>Medium</button></li>
             <li><button onClick={() => selectLevel(12)}>Hard</button></li>
         </ul>
+        <h2>How to play:</h2>
+    <ul>
+        <li>Open two cards at a time.</li>
+        <li>Find matching cards - as fast as possible - with as few clicks as possible!</li>
+    </ul>
     </section>)
 }
 

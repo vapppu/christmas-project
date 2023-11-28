@@ -64,8 +64,7 @@ const Game = ({songs, level}) => {
 
   return (
     <div className="game">
-      <h1>XMAS MUSIC GAME</h1>
-      <p>Find pairs!</p>
+      <h1>FIND PAIRS!</h1>
         <Result text="score" value={score} />
         <Result text="time" value={hoursMinutesSeconds(seconds)} />
         <Result text="clicks" value={clicks} />

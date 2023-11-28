@@ -4,6 +4,7 @@ const Card = ({card, handleClick}) => {
   const activityClass = card.active ? "active" : "nonActive";
   const icon = card.playing ? (
     <svg
+    className="play"
       width="50px"
       height="50px"
       viewBox="0 0 24 24"
@@ -21,6 +22,7 @@ const Card = ({card, handleClick}) => {
     </svg>
   ) : (
     <svg
+    className="play"
       width="50px"
       height="50px"
       viewBox="0 0 24 24"

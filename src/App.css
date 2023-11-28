@@ -40,7 +40,16 @@ img {
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: cornsilk;
+}
+h2 {
+  color: goldenrod;
+  font-weight: bold;
+}
+h1 {
+  font-weight: bold;
+  color: red;
+  letter-spacing: 0.1rem;
+  margin-block-end: 2rem;
 }
 
 .select {
@@ -53,12 +62,7 @@ body {
   max-width: 400px;
   margin: auto;
 }
-.select h1 {
-  font-weight: bold;
-  color: red;
-  letter-spacing: 0.1rem;
-  margin-block-end: 2rem;
-}
+
 .select p {
   text-align: center;
 }
@@ -107,16 +111,25 @@ h1,
   max-width: 100%;
   max-height: 100%;
 }
-.card:hover {
-  background-color: lightcoral;
+.card svg.play path {
+  fill: goldenrod;
+}
+.nonActive:hover {
+  box-shadow: 0 0 1rem 0.1rem sandybrown;
+}
+.nonActive:hover svg.play path {
+  fill: gold;
 }
 
 .active {
-  background-color: lightcoral;
+  background-color: red;
   box-shadow: inset 0.5rem 0.5rem 1rem 0rem darkred;
 }
+.active svg.play path {
+  fill: gold;
+}
 .nonActive {
-  background-color: red;
+  background-color: darkred;
   box-shadow: initial;
 }
 .found {
