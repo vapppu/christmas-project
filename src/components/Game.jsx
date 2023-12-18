@@ -4,7 +4,7 @@ import MusicCards from "./MusicCards";
 import Result from "./Result";
 import FinishScreen from "./FinishScreen"
 
-const Game = ({songs, level}) => {
+const Game = ({ songs, level }) => {
 
   const [score, setScore] = useState(0);
   const [gameIsFinished, setGameIsFinished] = useState(false)
@@ -45,31 +45,31 @@ const Game = ({songs, level}) => {
     setGameIsFinished(true)
     setFinishTime(seconds)
 
-}
+  }
 
   const hoursMinutesSeconds = (seconds) => {
     const date = new Date(null);
     date.setSeconds(seconds);
     if (seconds >= 3600) {
-        return date.toISOString().slice(11, 19);
+      return date.toISOString().slice(11, 19);
     }
     else {
-        return date.toISOString().slice(14, 19);
+      return date.toISOString().slice(14, 19);
     }
   }
 
   if (gameIsFinished) {
-    return <FinishScreen time={hoursMinutesSeconds(finishTime)} clicks={clicks}/>
+    return <FinishScreen time={hoursMinutesSeconds(finishTime)} clicks={clicks} />
   }
 
   return (
     <div className="game">
       <h1>XMAS MUSIC GAME</h1>
-      <p>Find pairs!</p>
-        <Result text="score" value={score} />
-        <Result text="time" value={hoursMinutesSeconds(seconds)} />
-        <Result text="clicks" value={clicks} />
-      <MusicCards songCards={songsToPlay} increaseScore={increaseScore} finishGame={finishGame} increaseClicks = {increaseClicks}/>
+      <p className="bold">Find pairs!</p>
+      <Result text="score" value={score} />
+      <Result text="time" value={hoursMinutesSeconds(seconds)} />
+      <Result text="clicks" value={clicks} />
+      <MusicCards songCards={songsToPlay} increaseScore={increaseScore} finishGame={finishGame} increaseClicks={increaseClicks} />
     </div>
   );
 }
